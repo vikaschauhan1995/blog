@@ -1,26 +1,23 @@
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from "react-redux";
 import {
   BrowserRouter, Routes, Route
 } from 'react-router-dom';
 import Home from './pages/Home';
 import SignIn from './pages/SignIn';
+import { checkUserLogin } from "./redux/SignIn/action";
+import { useSelector } from 'react-redux';
+import { IS_USER_LOGGEDIN, SIGNIN_REDUCER_KEY } from './redux/SignIn/const';
 
 
 function App() {
-  const [isUserSignedIn, setIsUserSignedIn] = useState(false);
+  const dispatch = useDispatch();
+  const state = useSelector(state => state[SIGNIN_REDUCER_KEY])
+  console.log("state ", state);
   useEffect(() => {
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-      console.log("user", user);
-      if (user) {
-        setIsUserSignedIn(true);
-      } else {
-        setIsUserSignedIn(false);
-      }
-    });
+    dispatch(checkUserLogin());
   }, []);
-  if (isUserSignedIn === true) {
+  if (state[IS_USER_LOGGEDIN]) {
     return (
       <div className="App">
         <BrowserRouter>

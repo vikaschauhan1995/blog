@@ -12,12 +12,12 @@ import { IS_USER_LOGGEDIN, SIGNIN_REDUCER_KEY } from './redux/SignIn/const';
 
 function App() {
   const dispatch = useDispatch();
-  const state = useSelector(state => state[SIGNIN_REDUCER_KEY])
+  const state = useSelector(state => state)
   console.log("state ", state);
   useEffect(() => {
     dispatch(checkUserLogin());
   }, []);
-  if (state[IS_USER_LOGGEDIN]) {
+  if (state?.[SIGNIN_REDUCER_KEY][IS_USER_LOGGEDIN]) {
     return (
       <div className="App">
         <BrowserRouter>

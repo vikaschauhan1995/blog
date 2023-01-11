@@ -1,19 +1,12 @@
 import React from 'react';
-import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
-import { firebase } from '../firebase/firebase';
 import { useSelector, useDispatch } from 'react-redux';
+import { signInAction } from '../redux/SignIn/action';
 
 const SignIn = () => {
-  const state = useSelector(state => state);
+  // const state = useSelector(state => state);
   const dispatch = useDispatch();
   const signInClick = () => {
-    let google_provider = new GoogleAuthProvider();
-    let auth = getAuth(firebase);
-    signInWithPopup(auth, google_provider).then((res) => {
-      console.log('google signIn response', res);
-    }).catch((err) => {
-      console.log('google signIn error', err);
-    });
+    dispatch(signInAction());
   }
   return (
     <div>

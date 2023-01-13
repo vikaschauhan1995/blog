@@ -13,7 +13,7 @@ import { IS_USER_LOGGEDIN, SIGNIN_REDUCER_KEY } from './redux/SignIn/const';
 function App() {
   const dispatch = useDispatch();
   const state = useSelector(state => state)
-  console.log("state ", state);
+  // console.log("state ", state);
   useEffect(() => {
     dispatch(checkUserLogin());
   }, []);

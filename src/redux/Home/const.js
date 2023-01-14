@@ -7,6 +7,7 @@ export const HOME_REDUCER_KEY = 'homePageReducer';
 
 // * action keys
 export const LOGOUT_ACTION = 'logoutAction';
+export const SEND_MESSAGE_ACTION = 'sendMessageAction';
 
 // * Reducer keys
 

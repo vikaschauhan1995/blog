@@ -5,7 +5,7 @@ import { db, realTimeDatabase } from '../firebase/firebase';
 import { useSelector, useDispatch } from 'react-redux';
 import { HOME_REDUCER_KEY } from '../redux/Home/const';
 import { SIGNIN_REDUCER_KEY, IS_USER_LOGGEDIN } from '../redux/SignIn/const';
-import { logoutAction } from '../redux/Home/action';
+import { logoutAction, sendMessageAction } from '../redux/Home/action';
 import { set, ref } from 'firebase/database';
 import { uid } from 'uid';
 import { _ID__KEY__, MESSAGE_FROM__KEY__, MESSAGE_TO__KEY__, MESSAGE__KEY__ } from '../redux/Home/const';
@@ -26,12 +26,14 @@ const Home = () => {
   }
   const clickSubmitButton = () => {
     const uniqueId = uid();
-    set(ref(realTimeDatabase, `/${uniqueId}/`), {
+    const data = {
       [_ID__KEY__]: uniqueId,
       [MESSAGE_FROM__KEY__]: signInReducerState[IS_USER_LOGGEDIN].email,
       [MESSAGE_TO__KEY__]: 'vikas.chauhan.bb@gmail.com',
       [MESSAGE__KEY__]: textInput
-    });
+    };
+    dispatch(sendMessageAction(data));
+    // set(ref(realTimeDatabase, `/${uniqueId}/`), data);
     setTextInput("");
   }
 

@@ -1,0 +1,47 @@
+.SignIn__container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+}
+
+.SignIn__inner_container {
+  width: 240px;
+  height: 50px;
+  border: 1px solid rgb(172, 172, 172);
+  // padding: 6px;
+  border-radius: 4px;
+  display: flex;
+  transition: all 0.2s;
+}
+
+.SignIn__inner_container:hover {
+  box-shadow: 0 0 10px #4285f4;
+  cursor: pointer;
+}
+
+.SignIn__googleIconContainer {
+  justify-content: center;
+  display: flex;
+}
+
+.SignIn__googleIconContainer img {
+  align-self: center;
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+.SignIn__googleButtonText {
+  width: 100%;
+  display: flex;
+  background-color: #4285f4;
+  justify-content: center;
+  color: white;
+}
+
+.SignIn__googleButtonText text {
+  align-self: center;
+}

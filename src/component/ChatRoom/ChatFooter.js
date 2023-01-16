@@ -15,9 +15,9 @@ const ChatFooter = () => {
           <input type="file" style={{ display: 'none' }} />
         </div>
         <div className="ChatFooter__action">
-          <lebel htmlFor="file">
-            <FontAwesomeIcon icon={faImage} />
-          </lebel>
+          {/* <lebel htmlFor="file"> */}
+          <FontAwesomeIcon icon={faImage} />
+          {/* </lebel> */}
         </div>
         <div className="ChatFooter__actionSend">
           <FontAwesomeIcon icon={faArrowRight} />

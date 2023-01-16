@@ -27,7 +27,7 @@ function* signInAction() {
   try {
     const isLoggedIn = yield signIn();
     function* runSetUserLoggedIn() {
-      yield put({ type: SET_USER_LOGGEDIN, payload: isLoggedIn });
+      yield put({ type: SET_USER_LOGGEDIN, payload: isLoggedIn.user });
     }
     // * check if the user is already logged in before
     const isEmailAvailable = yield checkIfEmailAlreadySignedIn(isLoggedIn.user[EMAIL__KEY__]);

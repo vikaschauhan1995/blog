@@ -16,7 +16,7 @@ const ConversationHeader = () => {
   return (
     <div className="ConversationHeader__container">
       <div className='ConversationHeader__containerLeft'>
-        <img src={state[IS_USER_LOGGEDIN][PHOTO_URL__KEY__]} alt="" referrerpolicy="no-referrer" />
+        <img src={state[IS_USER_LOGGEDIN][PHOTO_URL__KEY__]} alt="" referrerPolicy="no-referrer" />
       </div>
       <div className="ConversationHeader__containerMid">
         <b>{state[IS_USER_LOGGEDIN][DISPLAY_NAME__KEY__]}</b>

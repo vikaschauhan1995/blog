@@ -1,0 +1,27 @@
+.SearchConversationUserList__userList_item {
+  display: flex;
+  height: 45px;
+}
+
+.SearchConversationUserList__userList_item:hover {
+  background-color: rgb(240, 240, 240);
+  cursor: pointer;
+}
+
+.SearchConversationUserList__userList_item_left {
+  display: flex;
+  align-items: center;
+}
+
+.SearchConversationUserList__userList_item_left img {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  margin: 5px;
+  // padding: 5px;
+}
+
+.SearchConversationUserList__userList_item_right {
+  display: flex;
+  align-items: center;
+}

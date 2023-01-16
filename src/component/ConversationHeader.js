@@ -9,7 +9,7 @@ import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 const ConversationHeader = () => {
   const dispatch = useDispatch();
   const state = useSelector(state => state[SIGNIN_REDUCER_KEY]);
-  console.log("state", state[IS_USER_LOGGEDIN][PHOTO_URL__KEY__]);
+  // console.log("state", state[IS_USER_LOGGEDIN][PHOTO_URL__KEY__]);
   const signOutClick = () => {
     dispatch(logoutAction());
   }

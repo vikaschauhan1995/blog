@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 // import { getAuth, signOut } from 'firebase/auth';
 import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
 import { db, realTimeDatabase } from '../firebase/firebase';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { HOME_REDUCER_KEY } from '../redux/Home/const';
 import { SIGNIN_REDUCER_KEY, IS_USER_LOGGEDIN } from '../redux/SignIn/const';
 import { logoutAction, sendMessageAction } from '../redux/Home/action';
@@ -14,29 +14,39 @@ import { Col, Container, Row } from 'react-bootstrap';
 import ConversationHeader from '../component/ConversationHeader';
 import ConversationList from '../component/ConversationList';
 import ChatRoom from '../component/ChatRoom';
+import { searchUsesAction } from '../redux/Conversation/action';
+import SearchConversationUserList from '../component/SearchConversationUserList';
+import { SERCHED_USER_LIST__KEY__, CONVERSATION_REDUCER_KEY } from '../redux/Conversation/const';
 
 const Home = () => {
   // const messagesCollectionRef = query(collection(db, "message"), where("email", "==", "coolestvikas1995@gmail.com"));
   const dispatch = useDispatch();
-  // const state = useSelector(state => state);
-  const signInReducerState = useSelector(state => state[SIGNIN_REDUCER_KEY])
+  const state = useSelector(state => state);
+  // const signInReducerState = useSelector(state => state[SIGNIN_REDUCER_KEY])
+  const [searchInput, setSearchInput] = useState("");
   const [textInput, setTextInput] = useState("");
-  const handleTextInputChange = (event) => {
-    const input = event.target.value;
-    setTextInput(input);
+  const handleKeyDown = (e) => {
+    if (e.code === 'Enter') {
+      dispatch(searchUsesAction(searchInput));
+      console.log('Enter');
+    }
   }
-  const clickSubmitButton = () => {
-    const uniqueId = uid();
-    const data = {
-      [_ID__KEY__]: uniqueId,
-      [MESSAGE_FROM__KEY__]: signInReducerState[IS_USER_LOGGEDIN].email,
-      [MESSAGE_TO__KEY__]: 'vikas.chauhan.bb@gmail.com',
-      [MESSAGE__KEY__]: textInput
-    };
-    dispatch(sendMessageAction(data));
-    // set(ref(realTimeDatabase, `/${uniqueId}/`), data);
-    setTextInput("");
-  }
+  // const handleTextInputChange = (event) => {
+  //   const input = event.target.value;
+  //   setTextInput(input);
+  // }
+  // const clickSubmitButton = () => {
+  //   const uniqueId = uid();
+  //   const data = {
+  //     [_ID__KEY__]: uniqueId,
+  //     [MESSAGE_FROM__KEY__]: signInReducerState[IS_USER_LOGGEDIN].email,
+  //     [MESSAGE_TO__KEY__]: 'vikas.chauhan.bb@gmail.com',
+  //     [MESSAGE__KEY__]: textInput
+  //   };
+  //   dispatch(sendMessageAction(data));
+  //   // set(ref(realTimeDatabase, `/${uniqueId}/`), data);
+  //   setTextInput("");
+  // }
 
   return (
     <div className='Home__container'>
@@ -45,10 +55,15 @@ const Home = () => {
           <Col className="Home__col d-none d-sm-block" xs={0} sm={3} md={4} lg={4} xl={4}>
             <ConversationHeader />
             <div className='Home__conversationSearch'>
-              <input type="text" placeholder='Search' />
+              <input type="text" value={searchInput} onKeyDown={handleKeyDown} onChange={(e) => setSearchInput(e.target.value)} placeholder='Search' />
             </div>
             <div className="Home__conversationList">
-              <ConversationList />
+              {
+                state[CONVERSATION_REDUCER_KEY][SERCHED_USER_LIST__KEY__] ?
+                  <SearchConversationUserList />
+                  :
+                  <ConversationList />
+              }
             </div>
           </Col>
           <Col className="Home__col" xs={12} sm={9} md={8} lg={8} xl={8}>

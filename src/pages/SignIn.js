@@ -16,9 +16,9 @@ const SignIn = () => {
           <img src="https://www.google.com/favicon.ico" alt="google icon" />
         </div>
         <div className='SignIn__googleButtonText'>
-          <text>
+          <div>
             Sign in with Google
-          </text>
+          </div>
         </div>
       </div>
     </div>

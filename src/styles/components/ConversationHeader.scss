@@ -1,0 +1,44 @@
+.ConversationHeader__container {
+  background-color: #f2f2f2;
+  height: 50px;
+  display: flex;
+}
+
+.ConversationHeader__containerLeft img {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: grey;
+}
+
+.ConversationHeader__containerLeft {
+  width: auto;
+  display: flex;
+  align-items: center;
+}
+
+.ConversationHeader__containerMid {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.ConversationHeader__containerRight {
+  width: auto;
+  display: flex;
+  align-items: center;
+}
+
+.ConversationHeader__containerRight svg {
+  height: 25px;
+  width: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.ConversationHeader__containerRight svg:hover {
+  color: grey;
+  cursor: pointer;
+}

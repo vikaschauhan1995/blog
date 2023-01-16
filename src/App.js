@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/pages/App.scss';
 import { useDispatch } from "react-redux";
 import {
   BrowserRouter, Routes, Route

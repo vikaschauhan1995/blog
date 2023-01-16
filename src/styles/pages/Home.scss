@@ -1,0 +1,54 @@
+.Home__container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Home__innerContainer {
+  // background-color: yellow;
+  height: 90%;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgb(233, 233, 233);
+}
+
+.Home__row {
+  // background-color: red;
+  height: 100%;
+}
+
+.Home__col {
+  // background-color: red;
+  padding: 0px;
+}
+
+.bg-red {
+  background-color: red;
+}
+
+.Home__conversationSearch {
+  // height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.Home__conversationSearch input {
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border: 1px solid #c2c2c2;
+  border-radius: 6px;
+  padding: 4px;
+  padding-left: 10px;
+
+}
+
+.Home__conversationList {
+  height: 100%;
+}

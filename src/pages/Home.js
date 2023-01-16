@@ -9,20 +9,21 @@ import { logoutAction, sendMessageAction } from '../redux/Home/action';
 import { set, ref } from 'firebase/database';
 import { uid } from 'uid';
 import { _ID__KEY__, MESSAGE_FROM__KEY__, MESSAGE_TO__KEY__, MESSAGE__KEY__ } from '../redux/Home/const';
+import '../styles/pages/Home.scss';
+import { Col, Container, Row } from 'react-bootstrap';
+import ConversationHeader from '../component/ConversationHeader';
+import ConversationList from '../component/ConversationList';
+import ChatRoom from '../component/ChatRoom';
 
 const Home = () => {
   // const messagesCollectionRef = query(collection(db, "message"), where("email", "==", "coolestvikas1995@gmail.com"));
   const dispatch = useDispatch();
   // const state = useSelector(state => state);
   const signInReducerState = useSelector(state => state[SIGNIN_REDUCER_KEY])
-  console.log("signInReducerState ", signInReducerState);
   const [textInput, setTextInput] = useState("");
   const handleTextInputChange = (event) => {
     const input = event.target.value;
     setTextInput(input);
-  }
-  const signOutClick = () => {
-    dispatch(logoutAction());
   }
   const clickSubmitButton = () => {
     const uniqueId = uid();
@@ -38,15 +39,30 @@ const Home = () => {
   }
 
   return (
-    <div>
-      Home
+    <div className='Home__container'>
+      <Container className='Home__innerContainer'>
+        <Row className="Home__row">
+          <Col className="Home__col d-none d-sm-block" xs={0} sm={3} md={4} lg={4} xl={4}>
+            <ConversationHeader />
+            <div className='Home__conversationSearch'>
+              <input type="text" placeholder='Search' />
+            </div>
+            <div className="Home__conversationList">
+              <ConversationList />
+            </div>
+          </Col>
+          <Col className="Home__col" xs={12} sm={9} md={8} lg={8} xl={8}>
+            <ChatRoom />
+          </Col>
+        </Row>
+      </Container>
+      {/* 
       <div>
-        <button onClick={signOutClick}>Sign out</button>
       </div>
       <div>
         <input type="text" value={textInput} onChange={handleTextInputChange} />
         <button onClick={clickSubmitButton}>Submit</button>
-      </div>
+      </div> */}
     </div>
   )
 }

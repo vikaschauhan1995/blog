@@ -4,14 +4,16 @@ export const CONVERSATION_REDUCER_KEY = 'conversationReducer';
 
 // * state keys
 export const SERCHED_USER_LIST__KEY__ = 'searchedUserList'
-
+export const USER_CHAT_LIST__KEY__ = 'userChatList'
 
 // * action keys
 export const SEARCH_USER_ACTION = 'searchUserAction';
 export const CLICK_SEARCHED_USER_ACTION = 'clickSearchUserAction';
+export const GET_USER_CHAT_LIST_ACTION = 'getUserChatListAction';
 
 // * Reducer keys
-export const SET_SEARCHED_USER_LIST = 'setSearchedUserList'
+export const SET_SEARCHED_USER_LIST = 'setSearchedUserList';
+export const SET_USER_CHAT_LIST = 'setUserChatList';
 
 
 // * store keys

@@ -1,10 +1,11 @@
 import { put, takeLatest } from "redux-saga/effects";
-import { CLICK_SEARCHED_USER_ACTION, SEARCH_USER_ACTION, SET_SEARCHED_USER_LIST } from "./const";
-import { collection, getDocs, getDoc, query, setDoc, where, doc, updateDoc, serverTimestamp } from 'firebase/firestore';
+import { CLICK_SEARCHED_USER_ACTION, SEARCH_USER_ACTION, SET_SEARCHED_USER_LIST, SET_USER_CHAT_LIST } from "./const";
+import { collection, getDocs, getDoc, query, setDoc, where, doc, updateDoc, onSnapshot, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase/firebase.js';
 import { USERS__TABLE_KEY__, EMAIL__KEY__, UID__KEY__, DISPLAY_NAME__KEY__, PHOTO_URL__KEY__ } from "../SignIn/const";
 import { CONVERSATION__TABLE__KEY__, USER_INFO__KEY__, DATE__KEY__, USER_CHAT__KEY__ } from '../Conversation/const';
-import { CURRENT_USER, SELECTED_USER } from './const';
+import { CURRENT_USER, SELECTED_USER, GET_USER_CHAT_LIST_ACTION } from './const';
+import { getChatList } from './methods/getChatList';
 
 
 function* searchUsesAction(params) {
@@ -59,7 +60,21 @@ function* clickSearchedUserAction(data) {
   }
 }
 
+function* getUserChatListAction(params) {
+  const getChatList_ = yield getChatList(params.payload);
+  if (getChatList_) {
+    // console.log("getChatList_", getChatList_);
+    const chatObjectToArray = Object.entries(getChatList_);
+    yield put({ type: SET_USER_CHAT_LIST, payload: chatObjectToArray });
+  } else {
+    // * if no chat list
+    yield put({ type: SET_USER_CHAT_LIST, payload: [] });
+  }
+  // debugger;
+}
+
 export default function* saga() {
   yield takeLatest(SEARCH_USER_ACTION, searchUsesAction);
-  yield takeLatest(CLICK_SEARCHED_USER_ACTION, clickSearchedUserAction)
+  yield takeLatest(CLICK_SEARCHED_USER_ACTION, clickSearchedUserAction);
+  yield takeLatest(GET_USER_CHAT_LIST_ACTION, getUserChatListAction);
 }

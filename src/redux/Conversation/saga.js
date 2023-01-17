@@ -3,7 +3,7 @@ import { CLICK_SEARCHED_USER_ACTION, SEARCH_USER_ACTION, SET_SEARCHED_USER_LIST 
 import { collection, getDocs, getDoc, query, setDoc, where, doc, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase/firebase.js';
 import { USERS__TABLE_KEY__, EMAIL__KEY__, UID__KEY__, DISPLAY_NAME__KEY__, PHOTO_URL__KEY__ } from "../SignIn/const";
-import { CHATS__TABLE__KEY__, USER_INFO__KEY__, DATE__KEY__, USER_CHAT__KEY__ } from '../Conversation/const';
+import { CONVERSATION__TABLE__KEY__, USER_INFO__KEY__, DATE__KEY__, USER_CHAT__KEY__ } from '../Conversation/const';
 import { CURRENT_USER, SELECTED_USER } from './const';
 
 
@@ -25,28 +25,29 @@ function* clickSearchedUserAction(data) {
   const combinedId = currentUser[UID__KEY__] > selectedUser[UID__KEY__] ?
     currentUser[UID__KEY__] + selectedUser[UID__KEY__] : selectedUser[UID__KEY__] + currentUser[UID__KEY__];
   try {
-    const res = yield getDoc(doc(db, CHATS__TABLE__KEY__, combinedId));
+    const res = yield getDoc(doc(db, CONVERSATION__TABLE__KEY__, combinedId));
     if (!res.exists()) {
       // create a chat in chat collection
-      yield setDoc(doc(db, CHATS__TABLE__KEY__, combinedId), { messages: [] });
-
-      //create user chat
-      yield updateDoc(doc(db, USER_CHAT__KEY__, combinedId), {
-        [combinedId + `.${USER_INFO__KEY__}`]: {
-          [UID__KEY__]: selectedUser[UID__KEY__],
-          [DISPLAY_NAME__KEY__]: selectedUser[DISPLAY_NAME__KEY__],
-          [PHOTO_URL__KEY__]: selectedUser[PHOTO_URL__KEY__]
-        },
-        [combinedId + `.${DATE__KEY__}`]: serverTimestamp()
-      });
-      yield updateDoc(doc(db, USER_CHAT__KEY__, combinedId), {
-        [combinedId + `.${USER_INFO__KEY__}`]: {
-          [UID__KEY__]: currentUser[UID__KEY__],
-          [DISPLAY_NAME__KEY__]: currentUser[DISPLAY_NAME__KEY__],
-          [PHOTO_URL__KEY__]: currentUser[PHOTO_URL__KEY__]
-        },
-        [combinedId + `.${DATE__KEY__}`]: serverTimestamp()
-      });
+      yield setDoc(doc(db, CONVERSATION__TABLE__KEY__, combinedId), { messages: [] });
+      // create userChat
+      yield setDoc(doc(db, USER_CHAT__KEY__, combinedId),
+        {
+          [USER_INFO__KEY__]: {
+            [UID__KEY__]: currentUser[UID__KEY__],
+            [DISPLAY_NAME__KEY__]: currentUser[DISPLAY_NAME__KEY__],
+            [PHOTO_URL__KEY__]: currentUser[PHOTO_URL__KEY__]
+          },
+          [DATE__KEY__]: serverTimestamp()
+        });
+      yield setDoc(doc(db, USER_CHAT__KEY__, combinedId),
+        {
+          [USER_INFO__KEY__]: {
+            [UID__KEY__]: selectedUser[UID__KEY__],
+            [DISPLAY_NAME__KEY__]: selectedUser[DISPLAY_NAME__KEY__],
+            [PHOTO_URL__KEY__]: selectedUser[PHOTO_URL__KEY__]
+          },
+          [DATE__KEY__]: serverTimestamp()
+        });
     }
   } catch (error) {
     console.log('Got error on clickSearchedUserAction*: ', error);

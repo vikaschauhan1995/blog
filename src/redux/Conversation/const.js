@@ -15,7 +15,7 @@ export const SET_SEARCHED_USER_LIST = 'setSearchedUserList'
 
 
 // * store keys
-export const CHATS__TABLE__KEY__ = 'chats';
+export const CONVERSATION__TABLE__KEY__ = 'conversation';
 export const USER_CHAT__KEY__ = 'userChat'
 
 

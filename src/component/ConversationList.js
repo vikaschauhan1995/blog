@@ -5,8 +5,8 @@ import { onSnapshot, doc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import { IS_USER_LOGGEDIN, SIGNIN_REDUCER_KEY, UID__KEY__ } from '../redux/SignIn/const';
 import { useDispatch } from 'react-redux';
-import { getChatListAction } from '../redux/Conversation/action';
-import { CONVERSATION_REDUCER_KEY, USER_CHAT_LIST__KEY__ } from '../redux/Conversation/const';
+import { clickToOpenChatRoomAction, getChatListAction } from '../redux/Conversation/action';
+import { CONVERSATION_REDUCER_KEY, USER_CHAT_LIST__KEY__, USER_INFO__KEY__ } from '../redux/Conversation/const';
 
 const ConversationList = () => {
   const state = useSelector(state => state);
@@ -23,7 +23,7 @@ const ConversationList = () => {
         {
           userChatList?.map((chat) => {
             return (
-              <div className="SearchConversationUserList__userList_item" key={chat[0]}>
+              <div className="SearchConversationUserList__userList_item" onClick={() => dispatch(clickToOpenChatRoomAction(chat[1][USER_INFO__KEY__]))} key={chat[0]}>
                 <div className='SearchConversationUserList__userList_item_left'>
                   <img src={chat[1].userInfo.photoURL} alt="" referrerPolicy="no-referrer" />
                 </div>

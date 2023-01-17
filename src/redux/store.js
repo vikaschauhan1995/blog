@@ -4,6 +4,7 @@ import createSagaMiddleware from '@redux-saga/core';
 import signInSaga from './SignIn/saga';
 import homeSaga from './Home/saga';
 import conversationSaga from './Conversation/saga';
+import chatRoomSaga from './ChatRoom/saga';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -15,3 +16,4 @@ export default configureStore({
 sagaMiddleware.run(signInSaga);
 sagaMiddleware.run(homeSaga);
 sagaMiddleware.run(conversationSaga);
+sagaMiddleware.run(chatRoomSaga);

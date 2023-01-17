@@ -10,6 +10,7 @@ export const USER_CHAT_LIST__KEY__ = 'userChatList'
 export const SEARCH_USER_ACTION = 'searchUserAction';
 export const CLICK_SEARCHED_USER_ACTION = 'clickSearchUserAction';
 export const GET_USER_CHAT_LIST_ACTION = 'getUserChatListAction';
+export const CLICK_TO_OPEN_CHAT_ROOM_ACTION = 'clickOpenChatRoomAction';
 
 // * Reducer keys
 export const SET_SEARCHED_USER_LIST = 'setSearchedUserList';

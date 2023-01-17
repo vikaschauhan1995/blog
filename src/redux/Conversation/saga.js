@@ -1,5 +1,5 @@
 import { put, takeLatest } from "redux-saga/effects";
-import { CLICK_SEARCHED_USER_ACTION, SEARCH_USER_ACTION, SET_SEARCHED_USER_LIST, SET_USER_CHAT_LIST } from "./const";
+import { CLICK_SEARCHED_USER_ACTION, CLICK_TO_OPEN_CHAT_ROOM_ACTION, SEARCH_USER_ACTION, SET_SEARCHED_USER_LIST, SET_USER_CHAT_LIST } from "./const";
 import { collection, getDocs, getDoc, query, setDoc, where, doc, updateDoc, onSnapshot, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase/firebase.js';
 import { USERS__TABLE_KEY__, EMAIL__KEY__, UID__KEY__, DISPLAY_NAME__KEY__, PHOTO_URL__KEY__ } from "../SignIn/const";
@@ -73,8 +73,14 @@ function* getUserChatListAction(params) {
   // debugger;
 }
 
+function* clickToOpenChatRoomAction(params) {
+  const l = yield localStorage.getItem('fg');
+  debugger;
+}
+
 export default function* saga() {
   yield takeLatest(SEARCH_USER_ACTION, searchUsesAction);
   yield takeLatest(CLICK_SEARCHED_USER_ACTION, clickSearchedUserAction);
   yield takeLatest(GET_USER_CHAT_LIST_ACTION, getUserChatListAction);
+  yield takeLatest(CLICK_TO_OPEN_CHAT_ROOM_ACTION, clickToOpenChatRoomAction)
 }

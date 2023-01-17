@@ -24,7 +24,7 @@ const Home = () => {
   const state = useSelector(state => state);
   // const signInReducerState = useSelector(state => state[SIGNIN_REDUCER_KEY])
   const [searchInput, setSearchInput] = useState("");
-  const [textInput, setTextInput] = useState("");
+  // const [textInput, setTextInput] = useState("");
   const handleKeyDown = (e) => {
     if (e.code === 'Enter') {
       dispatch(searchUsesAction(searchInput));

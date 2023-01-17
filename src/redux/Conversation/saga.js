@@ -30,24 +30,29 @@ function* clickSearchedUserAction(data) {
       // create a chat in chat collection
       yield setDoc(doc(db, CONVERSATION__TABLE__KEY__, combinedId), { messages: [] });
       // create userChat
-      yield setDoc(doc(db, USER_CHAT__KEY__, combinedId),
+      yield setDoc(doc(db, USER_CHAT__KEY__, selectedUser[UID__KEY__]),
         {
-          [USER_INFO__KEY__]: {
-            [UID__KEY__]: currentUser[UID__KEY__],
-            [DISPLAY_NAME__KEY__]: currentUser[DISPLAY_NAME__KEY__],
-            [PHOTO_URL__KEY__]: currentUser[PHOTO_URL__KEY__]
-          },
-          [DATE__KEY__]: serverTimestamp()
+          [combinedId]: {
+            [USER_INFO__KEY__]: {
+              [UID__KEY__]: currentUser[UID__KEY__],
+              [DISPLAY_NAME__KEY__]: currentUser[DISPLAY_NAME__KEY__],
+              [PHOTO_URL__KEY__]: currentUser[PHOTO_URL__KEY__]
+            },
+            [DATE__KEY__]: serverTimestamp()
+          }
         });
-      yield setDoc(doc(db, USER_CHAT__KEY__, combinedId),
+      yield setDoc(doc(db, USER_CHAT__KEY__, currentUser[UID__KEY__]),
         {
-          [USER_INFO__KEY__]: {
-            [UID__KEY__]: selectedUser[UID__KEY__],
-            [DISPLAY_NAME__KEY__]: selectedUser[DISPLAY_NAME__KEY__],
-            [PHOTO_URL__KEY__]: selectedUser[PHOTO_URL__KEY__]
-          },
-          [DATE__KEY__]: serverTimestamp()
+          [combinedId]: {
+            [USER_INFO__KEY__]: {
+              [UID__KEY__]: selectedUser[UID__KEY__],
+              [DISPLAY_NAME__KEY__]: selectedUser[DISPLAY_NAME__KEY__],
+              [PHOTO_URL__KEY__]: selectedUser[PHOTO_URL__KEY__]
+            },
+            [DATE__KEY__]: serverTimestamp()
+          }
         });
+      // yield put({ type: '', payload: '' });
     }
   } catch (error) {
     console.log('Got error on clickSearchedUserAction*: ', error);

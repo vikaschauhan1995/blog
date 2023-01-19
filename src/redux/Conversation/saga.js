@@ -6,6 +6,7 @@ import { USERS__TABLE_KEY__, EMAIL__KEY__, UID__KEY__, DISPLAY_NAME__KEY__, PHOT
 import { CONVERSATION__TABLE__KEY__, USER_INFO__KEY__, DATE__KEY__, USER_CHAT__KEY__ } from '../Conversation/const';
 import { CURRENT_USER, SELECTED_USER, GET_USER_CHAT_LIST_ACTION } from './const';
 import { getChatList } from './methods/getChatList';
+import { SET_CHAT_ROOM_USER__KEY__ } from "../ChatRoom/const";
 
 
 function* searchUsesAction(params) {
@@ -74,8 +75,7 @@ function* getUserChatListAction(params) {
 }
 
 function* clickToOpenChatRoomAction(params) {
-  const l = yield localStorage.getItem('fg');
-  debugger;
+  yield put({ type: SET_CHAT_ROOM_USER__KEY__, payload: params.payload });
 }
 
 export default function* saga() {

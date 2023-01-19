@@ -7,6 +7,7 @@ import { CONVERSATION__TABLE__KEY__, USER_INFO__KEY__, DATE__KEY__, USER_CHAT__K
 import { CURRENT_USER, SELECTED_USER, GET_USER_CHAT_LIST_ACTION } from './const';
 import { getChatList } from './methods/getChatList';
 import { SET_CHAT_ROOM_USER__KEY__ } from "../ChatRoom/const";
+import { combinedUid } from "./methods/combinedUid";
 
 
 function* searchUsesAction(params) {
@@ -24,8 +25,7 @@ function* clickSearchedUserAction(data) {
   const currentUser = data.payload[CURRENT_USER];
   const selectedUser = data.payload[SELECTED_USER];
 
-  const combinedId = currentUser[UID__KEY__] > selectedUser[UID__KEY__] ?
-    currentUser[UID__KEY__] + selectedUser[UID__KEY__] : selectedUser[UID__KEY__] + currentUser[UID__KEY__];
+  const combinedId = combinedUid(currentUser[UID__KEY__], selectedUser[UID__KEY__]);
   try {
     const res = yield getDoc(doc(db, CONVERSATION__TABLE__KEY__, combinedId));
     if (!res.exists()) {

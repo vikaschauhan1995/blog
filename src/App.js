@@ -18,7 +18,7 @@ function App() {
   console.log("state ", state);
   useEffect(() => {
     dispatch(checkUserLogin());
-  }, []);
+  }, []); // ! NOTE: if not logged in automatically and stick on the signin page then, set the dependency to state and let the browser tab crash and re-run to on other tab to fix the issue  
   if (state?.[SIGNIN_REDUCER_KEY][IS_USER_LOGGEDIN]) {
     return (
       <div className="App">

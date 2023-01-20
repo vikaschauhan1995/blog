@@ -3,7 +3,7 @@ import '../styles/components/SearchConversationUserList.scss';
 import { useSelector } from 'react-redux';
 import { CONVERSATION_REDUCER_KEY, SERCHED_USER_LIST__KEY__ } from '../redux/Conversation/const';
 import { DISPLAY_NAME__KEY__, IS_USER_LOGGEDIN, PHOTO_URL__KEY__, SIGNIN_REDUCER_KEY, UID__KEY__ } from '../redux/SignIn/const';
-import { clickSearchedUserAction } from '../redux/Conversation/action';
+import { clickSearchedUserAction, makeDisableSearchedUserListAction } from '../redux/Conversation/action';
 import { useDispatch } from 'react-redux';
 import { CURRENT_USER, SELECTED_USER } from '../redux/Conversation/const';
 
@@ -19,6 +19,7 @@ const SearchConversationUserList = () => {
         [SELECTED_USER]: selectedUser
       };
       dispatch(clickSearchedUserAction(data));
+      dispatch(makeDisableSearchedUserListAction());
     }
     const list = users.map(user => {
       return (

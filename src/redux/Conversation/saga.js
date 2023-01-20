@@ -38,15 +38,29 @@ function* clickSearchedUserAction(data) {
         [PHOTO_URL__KEY__]: selectedUser[PHOTO_URL__KEY__],
         // [DATE__KEY__]: serverTimestamp()
       }
-      const userListCollection = yield getDoc(doc(db, USER_CHAT__KEY__, currentUser[UID__KEY__]));
-      if (!userListCollection.exists()) {
+      const currentUserData = {
+        [UID__KEY__]: currentUser[UID__KEY__],
+        [DISPLAY_NAME__KEY__]: currentUser[DISPLAY_NAME__KEY__],
+        [PHOTO_URL__KEY__]: currentUser[PHOTO_URL__KEY__],
+      }
+      // for current user
+      const currentUserListCollection = yield getDoc(doc(db, USER_CHAT__KEY__, currentUser[UID__KEY__]));
+      if (!currentUserListCollection.exists()) {
         yield setDoc(doc(db, USER_CHAT__KEY__, currentUser[UID__KEY__]), { list: [selectedUserData] });
       } else {
         yield updateDoc(doc(db, USER_CHAT__KEY__, currentUser[UID__KEY__]), {
           list: arrayUnion({ ...selectedUserData })
         });
       }
-
+      // for selected user
+      const selectedUserListCollection = yield getDoc(doc(db, USER_CHAT__KEY__, selectedUser[UID__KEY__]));
+      if (!selectedUserListCollection.exists()) {
+        yield setDoc(doc(db, USER_CHAT__KEY__, selectedUser[UID__KEY__]), { list: [currentUserData] });
+      } else {
+        yield updateDoc(doc(db, USER_CHAT__KEY__, selectedUser[UID__KEY__]), {
+          list: arrayUnion({ ...currentUserData })
+        });
+      }
       // yield setDoc(doc(db, USER_CHAT__KEY__, selectedUser[UID__KEY__]),
       //   {
       //     [combinedId]: {

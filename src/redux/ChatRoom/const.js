@@ -18,3 +18,7 @@ export const SET_CHAT_ROOM_CONVERSATION__KEY__ = 'setChatRoomConversation'
 
 
 // * store keys
+export const CONVERSATION_MESSAGE_ID__KEY__ = 'id';
+export const CONVERSATION_MESSAGE_MESSAGE_TEXT__KEY__ = 'text';
+export const CONVERSATION_MESSAGE_SENDER_UID__KEY__ = 'senderUid';
+export const CONVERSATION_MESSAGE_DATE__KEY__ = 'date';

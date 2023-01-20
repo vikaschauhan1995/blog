@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setChatRoomConversationAction } from '../../redux/ChatRoom/action';
-import { CHAT_ROOM_CONVERSATION, CHAT_ROOM_REDUCER_KEY, CHAT_ROOM_USER } from '../../redux/ChatRoom/const';
+import { CHAT_ROOM_CONVERSATION, CHAT_ROOM_REDUCER_KEY, CHAT_ROOM_USER, CONVERSATION_MESSAGE_ID__KEY__, CONVERSATION_MESSAGE_MESSAGE_TEXT__KEY__, CONVERSATION_MESSAGE_SENDER_UID__KEY__ } from '../../redux/ChatRoom/const';
 import { combinedUid } from '../../redux/Conversation/methods/combinedUid';
 import { SIGNIN_REDUCER_KEY, IS_USER_LOGGEDIN, UID__KEY__ } from '../../redux/SignIn/const';
 import { doc, onSnapshot } from "firebase/firestore";
@@ -18,9 +18,14 @@ const ChatBody = () => {
   const MessagesList = ({ list }) => {
     if (list.messages?.length > 0) {
       const l = list.messages?.map((item, index) => {
-        return <div key={item?.id + index}>{item?.text}</div>
+        return <div key={item?.[CONVERSATION_MESSAGE_ID__KEY__] + index} className={`ChatBody__conversationRow ChatBody__conversationRow_${item?.[CONVERSATION_MESSAGE_SENDER_UID__KEY__] === currentUser[UID__KEY__] ? 'right' : 'left'}`}>
+          <div
+            className={`ChatBody__conversatoinRow_bubble`}>
+            {item?.[CONVERSATION_MESSAGE_MESSAGE_TEXT__KEY__]}
+          </div>
+        </div>
       });
-      return l;
+      return <div style={{ height: '100%', overflow: 'scroll' }}><div style={{ height: '200px' }}>{l}</div></div>;
     } else {
       return <div>No Conversation</div>;
     }
@@ -34,7 +39,7 @@ const ChatBody = () => {
   }, []);
   // console.log("messageSnapshot", messageSnapshot);
   return (
-    <div>
+    <div style={{ height: '100%' }}>
       <MessagesList list={messages} />
     </div>
   )

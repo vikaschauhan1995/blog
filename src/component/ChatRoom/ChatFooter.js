@@ -18,7 +18,7 @@ const ChatFooter = () => {
   const combinedUid_ = combinedUid(currentUser[UID__KEY__], chatRoomUser[UID__KEY__])
   const [input, setInput] = useState("");
   const makeInputEmpty = () => setInput("");
-  const clickSubmitButton = () => {
+  const submitFunction = () => {
     const data = {
       id: uuid(),
       text: input,
@@ -28,11 +28,19 @@ const ChatFooter = () => {
     dispatch(clickSendMessage(data, combinedUid_, makeInputEmpty));
     makeInputEmpty();
   }
+  const clickSubmitButton = () => {
+    submitFunction();
+  }
+  const handleKeyDown = (e) => {
+    if (e.code === 'Enter') {
+      submitFunction();
+    }
+  }
   // console.log("Timestamp.now()", Timestamp.now());
   return (
     <div className="ChatFooter__container">
       <div className='ChatFooter__input'>
-        <input type="text" value={input} onChange={e => setInput(e.target.value)} placeholder="Type something..." />
+        <input type="text" value={input} onKeyDown={handleKeyDown} onChange={e => setInput(e.target.value)} placeholder="Type something..." />
       </div>
       <div className="ChatFooter__actions">
         <div className="ChatFooter__action">

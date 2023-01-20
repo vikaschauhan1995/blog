@@ -5,6 +5,7 @@ import ChatFooter from './ChatFooter';
 import ChatHeader from './ChatHeader';
 import { useSelector } from 'react-redux';
 import { CHAT_ROOM_REDUCER_KEY, CHAT_ROOM_USER } from '../../redux/ChatRoom/const';
+import EmptyChatRoom from './EmptyChatRoom';
 
 const ChatRoom = () => {
   const state = useSelector(state => state);
@@ -27,7 +28,7 @@ const ChatRoom = () => {
       </div>
     )
   } else {
-    return (<div>No User Found</div>)
+    return <EmptyChatRoom />;
   }
 }
 

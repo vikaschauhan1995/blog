@@ -7,7 +7,7 @@ import { clickSearchedUserAction, makeDisableSearchedUserListAction } from '../r
 import { useDispatch } from 'react-redux';
 import { CURRENT_USER, SELECTED_USER } from '../redux/Conversation/const';
 
-const SearchConversationUserList = () => {
+const SearchConversationUserList = ({ setSearchInput }) => {
   const state = useSelector(state => state);
   const usersList = state[CONVERSATION_REDUCER_KEY][SERCHED_USER_LIST__KEY__];
   const dispatch = useDispatch();
@@ -20,6 +20,7 @@ const SearchConversationUserList = () => {
       };
       dispatch(clickSearchedUserAction(data));
       dispatch(makeDisableSearchedUserListAction());
+      setSearchInput("");
     }
     const list = users.map(user => {
       return (

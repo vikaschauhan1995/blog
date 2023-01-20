@@ -7,6 +7,7 @@ import { DISPLAY_NAME__KEY__, IS_USER_LOGGEDIN, PHOTO_URL__KEY__, SIGNIN_REDUCER
 import { useDispatch } from 'react-redux';
 import { clickToOpenChatRoomAction, getChatListAction, setUserChatListAction } from '../redux/Conversation/action';
 import { CONVERSATION_REDUCER_KEY, USER_CHAT_LIST__KEY__, USER_CHAT__KEY__, USER_INFO__KEY__ } from '../redux/Conversation/const';
+import NoUserChatFound from './NoUserChatFound';
 
 const ConversationList = () => {
   const state = useSelector(state => state);
@@ -48,7 +49,7 @@ const ConversationList = () => {
       </div>
     )
   } else {
-    return (<div>No chat found</div>);
+    return <NoUserChatFound />
   }
 }
 

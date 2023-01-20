@@ -60,7 +60,7 @@ const Home = () => {
             <div className="Home__conversationList">
               {
                 state[CONVERSATION_REDUCER_KEY][SERCHED_USER_LIST__KEY__] ?
-                  <SearchConversationUserList />
+                  <SearchConversationUserList setSearchInput={setSearchInput} />
                   :
                   <ConversationList />
               }

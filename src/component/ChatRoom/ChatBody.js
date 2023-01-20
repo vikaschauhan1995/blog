@@ -36,7 +36,7 @@ const ChatBody = () => {
         dispatch(setChatRoomConversationAction(doc.data()));
       }
     });
-  }, []);
+  }, [chatRoomUser]);
   // console.log("messageSnapshot", messageSnapshot);
   return (
     <div style={{ height: '100%' }}>

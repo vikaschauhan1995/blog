@@ -6,9 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CHAT_ROOM_REDUCER_KEY, CHAT_ROOM_USER } from '../../redux/ChatRoom/const';
 import { SIGNIN_REDUCER_KEY, IS_USER_LOGGEDIN, UID__KEY__ } from '../../redux/SignIn/const';
 import { v4 as uuid } from 'uuid';
-import { Timestamp } from 'firebase/firestore';
+import { arrayUnion, doc, Timestamp, updateDoc } from 'firebase/firestore';
 import { clickSendMessage } from '../../redux/ChatRoom/action';
 import { combinedUid } from '../../redux/Conversation/methods/combinedUid';
+import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
+import { db, storage } from '../../firebase/firebase';
+import { CONVERSATION__TABLE__KEY__ } from '../../redux/Conversation/const';
+
 
 const ChatFooter = () => {
   const dispatch = useDispatch();
@@ -17,6 +21,7 @@ const ChatFooter = () => {
   const chatRoomUser = state[CHAT_ROOM_REDUCER_KEY][CHAT_ROOM_USER];
   const combinedUid_ = combinedUid(currentUser[UID__KEY__], chatRoomUser[UID__KEY__])
   const [input, setInput] = useState("");
+  const [imageInput, setImageInput] = useState(false);
   const makeInputEmpty = () => setInput("");
   const submitFunction = () => {
     const data = {
@@ -25,7 +30,9 @@ const ChatFooter = () => {
       senderUid: currentUser[UID__KEY__],
       date: Timestamp.now()
     };
-    dispatch(clickSendMessage(data, combinedUid_, makeInputEmpty));
+    if (input) {
+      dispatch(clickSendMessage(data, combinedUid_, makeInputEmpty));
+    }
     makeInputEmpty();
   }
   const clickSubmitButton = () => {
@@ -36,7 +43,33 @@ const ChatFooter = () => {
       submitFunction();
     }
   }
-  // console.log("Timestamp.now()", Timestamp.now());
+  const handleInputImage = async (e) => {
+    const img = e.target.files[0];
+    if (img) {
+      setImageInput(img);
+      const storageRef = ref(storage, uuid());
+      const uploadTask = uploadBytesResumable(storageRef, img);
+      uploadTask.on(
+        (error) => {
+          // TODO handle error
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            const data = {
+              id: uuid(),
+              img: downloadURL,
+              senderUid: currentUser[UID__KEY__],
+              date: Timestamp.now()
+            };
+            await updateDoc(doc(db, CONVERSATION__TABLE__KEY__, combinedUid_), {
+              messages: arrayUnion({ ...data })
+            });
+          })
+        }
+      )
+    }
+  }
+  // console.log("imageInput", imageInput);
   return (
     <div className="ChatFooter__container">
       <div className='ChatFooter__input'>
@@ -48,9 +81,10 @@ const ChatFooter = () => {
           <input type="file" style={{ display: 'none' }} />
         </div>
         <div className="ChatFooter__action">
-          {/* <lebel htmlFor="file"> */}
-          <FontAwesomeIcon icon={faImage} />
-          {/* </lebel> */}
+          <label htmlFor="imageInput">
+            <FontAwesomeIcon icon={faImage} />
+          </label>
+          <input type="file" onChange={handleInputImage} id="imageInput" accept="image/*" style={{ display: 'none' }} />
         </div>
         <div className="ChatFooter__actionSend" onClick={clickSubmitButton}>
           <FontAwesomeIcon icon={faArrowRight} />

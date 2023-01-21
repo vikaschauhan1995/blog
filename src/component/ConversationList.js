@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { clickToOpenChatRoomAction, getChatListAction, setUserChatListAction } from '../redux/Conversation/action';
 import { CONVERSATION_REDUCER_KEY, USER_CHAT_LIST__KEY__, USER_CHAT__KEY__, USER_INFO__KEY__ } from '../redux/Conversation/const';
 import NoUserChatFound from './NoUserChatFound';
+import { defaultImage } from '../static/const';
 
 const ConversationList = () => {
   const state = useSelector(state => state);
@@ -34,7 +35,7 @@ const ConversationList = () => {
             return (
               <div className="SearchConversationUserList__userList_item" onClick={() => dispatch(clickToOpenChatRoomAction(chat))} key={chat?.[UID__KEY__]}>
                 <div className='SearchConversationUserList__userList_item_left'>
-                  <img src={chat?.[PHOTO_URL__KEY__]} alt="" referrerPolicy="no-referrer" />
+                  <img src={chat?.[PHOTO_URL__KEY__] ? chat?.[PHOTO_URL__KEY__] : defaultImage} alt="" referrerPolicy="no-referrer" />
                 </div>
                 <div className="SearchConversationUserList__userList_item_right">
                   <div>

@@ -15,14 +15,25 @@ const ChatBody = () => {
   const chatRoomUser = state?.[CHAT_ROOM_REDUCER_KEY][CHAT_ROOM_USER];
   const combinedUid_ = combinedUid(currentUser[UID__KEY__], chatRoomUser[UID__KEY__]);
   const messages = state?.[CHAT_ROOM_REDUCER_KEY][CHAT_ROOM_CONVERSATION]
+  const Bubble = ({ data }) => {
+    try {
+      if (data.img) {
+        return <img src={data.img} height="150px" width="100px" alt="" />
+      } else if (data.text) {
+        return <div
+          className={`ChatBody__conversatoinRow_bubble`}>
+          {data?.[CONVERSATION_MESSAGE_MESSAGE_TEXT__KEY__]}
+        </div>
+      }
+    } catch (e) {
+      console.log('Error in Conversation message bubble : ', e);
+    }
+  }
   const MessagesList = ({ list }) => {
     if (list.messages?.length > 0) {
       const l = list.messages?.map((item, index) => {
         return <div key={item?.[CONVERSATION_MESSAGE_ID__KEY__] + index} className={`ChatBody__conversationRow ChatBody__conversationRow_${item?.[CONVERSATION_MESSAGE_SENDER_UID__KEY__] === currentUser[UID__KEY__] ? 'right' : 'left'}`}>
-          <div
-            className={`ChatBody__conversatoinRow_bubble`}>
-            {item?.[CONVERSATION_MESSAGE_MESSAGE_TEXT__KEY__]}
-          </div>
+          <Bubble data={item} />
         </div>
       });
       return <div style={{ height: '100%', overflow: 'scroll' }}><div style={{ height: '200px' }}>{l}</div></div>;

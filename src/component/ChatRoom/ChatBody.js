@@ -7,6 +7,7 @@ import { SIGNIN_REDUCER_KEY, IS_USER_LOGGEDIN, UID__KEY__ } from '../../redux/Si
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import { CONVERSATION__TABLE__KEY__ } from '../../redux/Conversation/const';
+import NoConversation from './NoConversation';
 
 const ChatBody = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,8 @@ const ChatBody = () => {
   const Bubble = ({ data }) => {
     try {
       if (data.img) {
-        return <img src={data.img} height="150px" width="100px" alt="" />
+        return <div style={{ background: `url("${data.img}")`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundColor: '#747875' }} className="Bubble_image"></div>
+        // return <img className="Bubble_image" src={data.img} alt="" />
       } else if (data.text) {
         return <div
           className={`ChatBody__conversatoinRow_bubble`}>
@@ -36,9 +38,9 @@ const ChatBody = () => {
           <Bubble data={item} />
         </div>
       });
-      return <div style={{ height: '100%', overflow: 'scroll' }}><div style={{ height: '200px' }}>{l}</div></div>;
+      return <div className="MessagesList_block" style={{ height: '100%', overflow: 'scroll' }}><div style={{ height: '200px' }}>{l}</div></div>;
     } else {
-      return <div>No Conversation</div>;
+      return <NoConversation />;
     }
   }
   useEffect(() => {
@@ -48,7 +50,7 @@ const ChatBody = () => {
       }
     });
   }, [chatRoomUser]);
-  // console.log("messageSnapshot", messageSnapshot);
+  // console.log("messages", messages);
   return (
     <div style={{ height: '100%' }}>
       <MessagesList list={messages} />

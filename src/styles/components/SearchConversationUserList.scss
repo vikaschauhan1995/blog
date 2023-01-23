@@ -1,6 +1,13 @@
 .SearchConversationUserList__userList_item {
+  // height: 45px;
+}
+
+.SearchConversationUserList__userList_itemInner {
   display: flex;
-  height: 45px;
+  margin-left: 15px;
+  margin-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .SearchConversationUserList__userList_item:hover {
@@ -14,14 +21,13 @@
 }
 
 .SearchConversationUserList__userList_item_left img {
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
   border-radius: 50%;
-  margin: 5px;
-  // padding: 5px;
 }
 
 .SearchConversationUserList__userList_item_right {
   display: flex;
   align-items: center;
+  margin-left: 10px;
 }

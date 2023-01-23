@@ -86,9 +86,9 @@ const ChatFooter = () => {
           </label>
           <input type="file" onChange={handleInputImage} id="imageInput" accept="image/*" style={{ display: 'none' }} />
         </div>
-        <div className="ChatFooter__actionSend" onClick={clickSubmitButton}>
+        {/* <div className="ChatFooter__actionSend" onClick={clickSubmitButton}>
           <FontAwesomeIcon icon={faArrowRight} />
-        </div>
+        </div> */}
       </div>
     </div>
   )

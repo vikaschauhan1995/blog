@@ -9,11 +9,11 @@
 }
 
 .ChatRoom__header {
-  background-color: #e3e3e3;
+  // background-color: red;
 }
 
 .ChatRoom__body {
-  background-color: #fff8f7;
+  // background-color: #fff8f7;
   flex: 1;
   // background-color: yellow;
   // overflow: scroll;
@@ -25,10 +25,13 @@
 
 .ChatBody__conversationRow {
   // display: flex;
-  // align-items: flex-end;
   // position: relative;
-  margin-left: 12px;
-  margin-right: 12px;
+  // margin-left: 12px;
+  // margin-right: 12px;
+  padding-left: 12px;
+  padding-right: 12px;
+  width: 100%;
+  // justify-content: end;
 }
 
 .ChatBody__conversationRow_left {
@@ -43,13 +46,13 @@
 }
 
 .ChatBody__conversatoinRow_bubble {
-  border: 1px solid rgb(209, 209, 209);
+  // border: 1px solid rgb(209, 209, 209);
   border-radius: 5px;
-  background-color: rgb(233, 233, 233);
-  padding-left: 12px;
-  padding-right: 12px;
-  margin-top: 12px;
-  margin-bottom: 12px;
+  // background-color: rgb(233, 233, 233);
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .MessagesList_block::-webkit-scrollbar {
@@ -60,6 +63,10 @@
 .MessagesList_block {
   -ms-overflow-style: none;
   scrollbar-width: none;
+  display: flex;
+  flex: 1;
+  // background-color: red;
+  // align-items: end;
   /* Firefox */
 }
 
@@ -72,4 +79,22 @@
   height: 150px;
   background-color: grey;
 
+}
+
+.ChatBody___header {
+  position: absolute;
+  width: 100%;
+  // filter: blur(4px);
+  // background-color: white;
+  // border: 1px solid black;
+  // background: linear-gradient(1turn, rgba(255, 255, 255, 0), 10%, rgb(255, 255, 255));
+  // background: linear-gradient(1turn, red, 10%, blue);
+}
+
+.ChatBody__conversatoinRow_bubble_left {
+  background: #a1ffba;
+}
+
+.ChatBody__conversatoinRow_bubble_right {
+  background: #b8fffa;
 }

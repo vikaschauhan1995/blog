@@ -15,14 +15,16 @@ const ConversationHeader = () => {
   }
   return (
     <div className="ConversationHeader__container">
-      <div className='ConversationHeader__containerLeft'>
-        <img src={state[IS_USER_LOGGEDIN][PHOTO_URL__KEY__]} alt="" referrerPolicy="no-referrer" />
-      </div>
-      <div className="ConversationHeader__containerMid">
-        <b>{state[IS_USER_LOGGEDIN][DISPLAY_NAME__KEY__]}</b>
-      </div>
-      <div className="ConversationHeader__containerRight">
-        <FontAwesomeIcon onClick={signOutClick} icon={faRightFromBracket} />
+      <div className="ConversationHeader__innerContainer">
+        <div className='ConversationHeader__containerLeft'>
+          <img src={state[IS_USER_LOGGEDIN][PHOTO_URL__KEY__]} alt="" referrerPolicy="no-referrer" />
+        </div>
+        <div className="ConversationHeader__containerMid">
+          <b>{state[IS_USER_LOGGEDIN][DISPLAY_NAME__KEY__]}</b>
+        </div>
+        <div className="ConversationHeader__containerRight">
+          <FontAwesomeIcon onClick={signOutClick} icon={faRightFromBracket} />
+        </div>
       </div>
     </div>
   )

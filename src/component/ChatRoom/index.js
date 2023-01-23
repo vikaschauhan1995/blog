@@ -16,7 +16,7 @@ const ChatRoom = () => {
       <div className='ChatRoom__container'>
         <div className='ChatRoom__innnerContainer'>
           <div className='ChatRoom__header'>
-            <ChatHeader />
+
           </div>
           <div className='ChatRoom__body'>
             <ChatBody />

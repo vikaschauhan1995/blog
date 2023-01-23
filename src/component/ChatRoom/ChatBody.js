@@ -8,6 +8,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import { CONVERSATION__TABLE__KEY__ } from '../../redux/Conversation/const';
 import NoConversation from './NoConversation';
+import ChatHeader from './ChatHeader';
 
 const ChatBody = () => {
   const dispatch = useDispatch();
@@ -16,14 +17,14 @@ const ChatBody = () => {
   const chatRoomUser = state?.[CHAT_ROOM_REDUCER_KEY][CHAT_ROOM_USER];
   const combinedUid_ = combinedUid(currentUser[UID__KEY__], chatRoomUser[UID__KEY__]);
   const messages = state?.[CHAT_ROOM_REDUCER_KEY][CHAT_ROOM_CONVERSATION]
-  const Bubble = ({ data }) => {
+  const Bubble = ({ data, direction }) => {
     try {
       if (data.img) {
         return <div style={{ background: `url("${data.img}")`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundColor: '#747875' }} className="Bubble_image"></div>
         // return <img className="Bubble_image" src={data.img} alt="" />
       } else if (data.text) {
         return <div
-          className={`ChatBody__conversatoinRow_bubble`}>
+          className={`ChatBody__conversatoinRow_bubble ChatBody__conversatoinRow_bubble_${direction}`}>
           {data?.[CONVERSATION_MESSAGE_MESSAGE_TEXT__KEY__]}
         </div>
       }
@@ -34,11 +35,12 @@ const ChatBody = () => {
   const MessagesList = ({ list }) => {
     if (list.messages?.length > 0) {
       const l = list.messages?.map((item, index) => {
-        return <div key={item?.[CONVERSATION_MESSAGE_ID__KEY__] + index} className={`ChatBody__conversationRow ChatBody__conversationRow_${item?.[CONVERSATION_MESSAGE_SENDER_UID__KEY__] === currentUser[UID__KEY__] ? 'right' : 'left'}`}>
-          <Bubble data={item} />
+        const direction = item?.[CONVERSATION_MESSAGE_SENDER_UID__KEY__] === currentUser[UID__KEY__] ? 'right' : 'left';
+        return <div key={item?.[CONVERSATION_MESSAGE_ID__KEY__] + index} className={`ChatBody__conversationRow ChatBody__conversationRow_${direction}`}>
+          <Bubble direction={direction} data={item} />
         </div>
       });
-      return <div className="MessagesList_block" style={{ height: '100%', overflow: 'scroll' }}><div style={{ height: '200px' }}>{l}</div></div>;
+      return <div className="MessagesList_block" style={{ height: '100%', overflow: 'scroll' }}><div style={{ height: '200px', width: '99%' }}>{l}</div></div>;
     } else {
       return <NoConversation />;
     }
@@ -52,7 +54,10 @@ const ChatBody = () => {
   }, [chatRoomUser]);
   // console.log("messages", messages);
   return (
-    <div style={{ height: '100%' }}>
+    <div style={{ height: '100%', position: 'relative' }}>
+      <div className="ChatBody___header">
+        <ChatHeader />
+      </div>
       <MessagesList list={messages} />
     </div>
   )

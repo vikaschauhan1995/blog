@@ -13,14 +13,16 @@ const ChatHeader = () => {
   // console.log("ChatHeader state", state);
   return (
     <div className="ChatHeader__container">
-      <div className="ChatHeader__left">
-        <img src={chatRoomUser?.[PHOTO_URL__KEY__] ? chatRoomUser?.[PHOTO_URL__KEY__] : defaultImage} alt="" referrerPolicy="no-referrer" />
-      </div>
-      <div className="ChatHeader__mid">
-        <b>{chatRoomUser?.[DISPLAY_NAME__KEY__]}</b>
-      </div>
-      <div className="ChatHeader__right">
-        <FontAwesomeIcon icon={faEllipsisVertical} />
+      <div className="ChatHeader__containerInner">
+        <div className="ChatHeader__left">
+          <img src={chatRoomUser?.[PHOTO_URL__KEY__] ? chatRoomUser?.[PHOTO_URL__KEY__] : defaultImage} alt="" referrerPolicy="no-referrer" />
+        </div>
+        <div className="ChatHeader__mid">
+          <b>{chatRoomUser?.[DISPLAY_NAME__KEY__]}</b>
+        </div>
+        <div className="ChatHeader__right">
+          <FontAwesomeIcon icon={faEllipsisVertical} />
+        </div>
       </div>
     </div>
   )

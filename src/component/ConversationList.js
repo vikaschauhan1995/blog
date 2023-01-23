@@ -34,13 +34,15 @@ const ConversationList = () => {
           userChatList?.map((chat) => {
             return (
               <div className="SearchConversationUserList__userList_item" onClick={() => dispatch(clickToOpenChatRoomAction(chat))} key={chat?.[UID__KEY__]}>
-                <div className='SearchConversationUserList__userList_item_left'>
-                  <img src={chat?.[PHOTO_URL__KEY__] ? chat?.[PHOTO_URL__KEY__] : defaultImage} alt="" referrerPolicy="no-referrer" />
-                </div>
-                <div className="SearchConversationUserList__userList_item_right">
-                  <div>
-                    {chat?.[DISPLAY_NAME__KEY__]}<br />
-                    {/* <span>last message</span> */}
+                <div className="SearchConversationUserList__userList_itemInner">
+                  <div className='SearchConversationUserList__userList_item_left'>
+                    <img src={chat?.[PHOTO_URL__KEY__] ? chat?.[PHOTO_URL__KEY__] : defaultImage} alt="" referrerPolicy="no-referrer" />
+                  </div>
+                  <div className="SearchConversationUserList__userList_item_right">
+                    <div>
+                      {chat?.[DISPLAY_NAME__KEY__]}<br />
+                      {/* <span>last message</span> */}
+                    </div>
                   </div>
                 </div>
               </div>

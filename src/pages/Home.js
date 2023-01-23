@@ -53,17 +53,21 @@ const Home = () => {
       <Container className='Home__innerContainer'>
         <Row className="Home__row">
           <Col className="Home__col d-none d-sm-block" xs={0} sm={3} md={4} lg={4} xl={4}>
-            <ConversationHeader />
-            <div className='Home__conversationSearch'>
-              <input type="text" value={searchInput} onKeyDown={handleKeyDown} onChange={(e) => setSearchInput(e.target.value)} placeholder='Search' />
-            </div>
-            <div className="Home__conversationList">
-              {
-                state[CONVERSATION_REDUCER_KEY][SERCHED_USER_LIST__KEY__] ?
-                  <SearchConversationUserList setSearchInput={setSearchInput} />
-                  :
-                  <ConversationList />
-              }
+            <div className="Home__leftColumnOuter">
+              <div className="Home__rightColumnInner">
+                <ConversationHeader />
+                <div className='Home__conversationSearch'>
+                  <input type="text" value={searchInput} onKeyDown={handleKeyDown} onChange={(e) => setSearchInput(e.target.value)} placeholder='Search' />
+                </div>
+                <div className="Home__conversationList">
+                  {
+                    state[CONVERSATION_REDUCER_KEY][SERCHED_USER_LIST__KEY__] ?
+                      <SearchConversationUserList setSearchInput={setSearchInput} />
+                      :
+                      <ConversationList />
+                  }
+                </div>
+              </div>
             </div>
           </Col>
           <Col className="Home__col" xs={12} sm={9} md={8} lg={8} xl={8}>

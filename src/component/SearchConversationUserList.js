@@ -25,11 +25,13 @@ const SearchConversationUserList = ({ setSearchInput }) => {
     const list = users.map(user => {
       return (
         <div className="SearchConversationUserList__userList_item" onClick={() => handleClick(user)} key={user[UID__KEY__]}>
-          <div className='SearchConversationUserList__userList_item_left'>
-            <img src={user[PHOTO_URL__KEY__]} alt="" referrerPolicy="no-referrer" />
-          </div>
-          <div className="SearchConversationUserList__userList_item_right">
-            <div>{user[DISPLAY_NAME__KEY__]}</div>
+          <div className="SearchConversationUserList__userList_itemInner">
+            <div className='SearchConversationUserList__userList_item_left'>
+              <img src={user[PHOTO_URL__KEY__]} alt="" referrerPolicy="no-referrer" />
+            </div>
+            <div className="SearchConversationUserList__userList_item_right">
+              <div>{user[DISPLAY_NAME__KEY__]}</div>
+            </div>
           </div>
         </div>
       );

@@ -1,7 +1,7 @@
-import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
+import { GoogleAuthProvider, FacebookAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import { firebase } from '../../../firebase/firebase';
 
-export function signIn() {
+export function googleSignIn() {
   return new Promise((resolve, reject) => {
     let google_provider = new GoogleAuthProvider();
     let auth = getAuth(firebase);
@@ -15,4 +15,32 @@ export function signIn() {
       console.log('google signIn signInWithPopup error', err);
     });
   });
+}
+
+export function facebookSignIn() {
+  return new Promise((resolve, reject) => {
+    const facebook_provider = new FacebookAuthProvider();
+    const auth = getAuth(firebase);
+    facebook_provider.setCustomParameters({
+      'display': 'popup'
+    });
+    signInWithPopup(auth, facebook_provider).then((res) => {
+      const user = res;
+      // console.log("facebook signin user", user);
+      resolve(user);
+      // const credential = FacebookAuthProvider.credentialFromResult(res);
+      // const accessToken = credential.accessToken;
+    }).catch(error => {
+      // * If the user failed to facebook loggedin
+      // Handle Errors here.
+      // const errorCode = error.code;
+      // const errorMessage = error.message;
+      // The email of the user's account used.
+      // const email = error.customData.email;
+      // The AuthCredential type that was used.
+      // const credential = FacebookAuthProvider.credentialFromError(error);
+      console.log("facebook signing signInWithPopup error", error);
+      resolve(false);
+    });
+  })
 }

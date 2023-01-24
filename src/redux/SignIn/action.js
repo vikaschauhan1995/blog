@@ -9,8 +9,9 @@ export function checkUserLogin() {
 }
 
 
-export function signInAction() {
+export function signInAction(provider) {
   return {
-    type: SIGNIN_ACTION
+    type: SIGNIN_ACTION,
+    payload: provider
   }
 }

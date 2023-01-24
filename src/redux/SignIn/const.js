@@ -20,3 +20,6 @@ export const EMAIL__KEY__ = "email";
 export const DISPLAY_NAME__KEY__ = "displayName";
 export const PHOTO_URL__KEY__ = "photoURL";
 export const UID__KEY__ = "uid";
+
+export const GOOGLE_SIGNIN = 'google';
+export const FACEBOOK_SIGNIN = 'facebook';

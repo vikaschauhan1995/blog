@@ -1,3 +1,5 @@
+$sky-blue: #4285f4;
+
 .SignIn__container {
   position: absolute;
   height: 100%;
@@ -5,10 +7,10 @@
   justify-content: center;
   align-items: center;
   display: flex;
-
+  flex-direction: column;
 }
 
-.SignIn__inner_container {
+.GoogleSignIn__inner_container {
   width: 240px;
   height: 50px;
   border: 1px solid rgb(172, 172, 172);
@@ -18,21 +20,18 @@
   transition: all 0.2s;
 }
 
-.SignIn__inner_container:hover {
-  box-shadow: 0 0 10px #4285f4;
+.GoogleSignIn__inner_container:hover {
+  box-shadow: 0 0 10px $sky-blue;
   cursor: pointer;
 }
 
 .SignIn__googleIconContainer {
   justify-content: center;
+  align-items: center;
   display: flex;
+  width: 65px;
 }
 
-.SignIn__googleIconContainer img {
-  align-self: center;
-  padding-left: 7px;
-  padding-right: 7px;
-}
 
 .SignIn__googleButtonText {
   width: 100%;
@@ -44,4 +43,66 @@
 
 .SignIn__googleButtonText div {
   align-self: center;
+}
+
+.SignIn__facebookIconContainer {
+  display: flex;
+  width: 65px;
+}
+
+.SignIn__facebookIconContainer i {
+  margin-left: 10px;
+  margin-top: 8px;
+}
+
+.FacebookSigin__inner_container {
+  width: 240px;
+  height: 50px;
+  border: 1px solid rgb(172, 172, 172);
+  // padding: 6px;
+  // background-color: #1369f3;
+  border-radius: 4px;
+  display: flex;
+  transition: all 0.2s;
+  margin-top: 10px;
+}
+
+.FacebookSigin__inner_container:hover {
+  box-shadow: 0 0 10px $sky-blue;
+  cursor: pointer;
+}
+
+.gg-facebook {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 1));
+  // width: 40px;
+  height: 35px;
+}
+
+.gg-facebook::after,
+.gg-facebook::before {
+  content: "";
+  display: block;
+  position: absolute;
+  box-sizing: border-box
+}
+
+.gg-facebook::before {
+  width: 15px;
+  height: 35px;
+  border-left: 7px solid $sky-blue;
+  border-top: 7px solid $sky-blue;
+  border-top-left-radius: 8px;
+  left: 10px
+}
+
+.gg-facebook::after {
+  width: 17px;
+  height: 8px;
+  background: $sky-blue;
+  top: 13px;
+  left: 5px;
+  transform: skew(-5deg)
 }

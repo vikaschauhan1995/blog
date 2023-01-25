@@ -15,7 +15,7 @@ const SignIn = () => {
   }
   return (
     <div className="SignIn__container">
-      <div className="SignIn__inner_container" onClick={googleSignInClick}>
+      <div className="GoogleSignIn__inner_container" onClick={googleSignInClick}>
         <div className='SignIn__googleIconContainer'>
           <img src="https://www.google.com/favicon.ico" alt="google icon" />
         </div>
@@ -25,7 +25,16 @@ const SignIn = () => {
           </div>
         </div>
       </div>
-      <button onClick={facebookSignInClick}>Facebook login</button>
+      <div className="FacebookSigin__inner_container" onClick={facebookSignInClick}>
+        <div className='SignIn__facebookIconContainer'>
+          <i className="gg-facebook"></i>
+        </div>
+        <div className='SignIn__googleButtonText'>
+          <div>
+            Sign in with Facebook
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
